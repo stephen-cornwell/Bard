@@ -147,6 +147,12 @@ namespace Bard.Tests.gRPC
             scenario.When.Grpc<CreditRatingCheck.CreditRatingCheckClient, CreditReply>(client => client.CheckCreditRequest(creditRequest));
             scenario.When.Grpc<BankAccountService.BankAccountServiceClient, BankAccountResponse>(client => client.GetBankAccount(new BankAccountRequest()));
 
+
+            scenario.WhenAll(client => 
+            {
+
+            })
+
             scenario.Then.Response.ShouldBe.Ok();
         }
 
