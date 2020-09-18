@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Bard.Infrastructure;
 using Bard.Internal.Then;
 using Bard.Internal.When;
@@ -32,6 +33,22 @@ namespace Bard.gRPC.Internal
             _eventAggregator.PublishGrpcResponse(new GrpcResponse(response));
             
             return response;
+        }
+
+        public void GrpcAll<TGrpcClient, TResponse>(List<Func<TGrpcClient, TResponse>> grpcCalls) where TGrpcClient : ClientBase<TGrpcClient>
+        {
+            PreApiCall?.Invoke();
+
+            WriteHeader();
+
+            foreach (var grpcCall in grpcCalls)
+            {
+                var gRpcClient = _grpcClientFactory.Create<TGrpcClient>();
+
+                var response = grpcCall(gRpcClient);
+
+                _eventAggregator.PublishGrpcResponse(new GrpcResponse(response));
+            }
         }
     }
 }

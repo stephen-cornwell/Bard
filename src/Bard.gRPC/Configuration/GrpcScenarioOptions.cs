@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Bard.Configuration;
 using Grpc.Core;
 
-namespace Bard.gRPC
+namespace Bard.gRPC.Configuration
 {
     /// <summary>
     ///     ScenarioOptions supplies all the necessary configuration

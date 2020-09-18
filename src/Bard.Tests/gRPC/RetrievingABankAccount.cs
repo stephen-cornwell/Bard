@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Bard.gRPC;
+using Bard.gRPC.Configuration;
 using Bard.gRPCService;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -29,12 +30,12 @@ namespace Bard.Tests.gRPC
             _httpClient = _host.GetTestClient();
 
             Scenario = GrpcScenarioConfiguration
-                .UseGrpc<BankAccountService.BankAccountServiceClient>()
+                .UseGrpc()
                 .Configure(options =>
                 {
                     options.Services = _host.Services;
                     options.LogMessage = output.WriteLine;
-                    //options.GrpcClient = c => new BankAccountService.BankAccountServiceClient(c);
+                    options.AddGrpcClient<BankAccountService.BankAccountServiceClient>("");
                     options.Client = _httpClient;
                 });
         }

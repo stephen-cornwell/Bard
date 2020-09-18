@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
+using Bard.gRPC.Configuration;
 using Bard.gRPC.Internal;
 using Bard.Infrastructure;
 using Bard.Internal;

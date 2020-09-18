@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using System;
+using Grpc.Core;
 
 namespace Bard.gRPC
 {
@@ -24,6 +25,8 @@ namespace Bard.gRPC
         ///     Test Act
         /// </summary>
         Bard.gRPC.IWhen  When { get; }
+
+       public IWhen WhenAll<TScenario, TResponse>(Action<TScenario, TResponse> calls);
 
         /// <summary>
         ///     Test Assertion
